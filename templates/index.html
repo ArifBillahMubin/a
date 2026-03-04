@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EV Energy Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 40px; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; color: #555; }
+        input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1em; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-left: 5px solid #007bff; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>⚡ EV Energy Predictor</h2>
+    <p>Fill in the trip details to estimate energy consumption.</p>
+
+    <form action="/predict" method="post">
+        <div class="input-group">
+            <label>Trip Distance (km)</label>
+            <input type="number" step="any" name="Trip Distance" required placeholder="e.g. 6.5">
+        </div>
+
+        <div class="input-group">
+            <label>Time of Day (Hour 0-24)</label>
+            <input type="number" step="any" name="Time of Day" required placeholder="e.g. 14.5">
+        </div>
+
+        <div class="input-group">
+            <label>Day of the Week (1=Mon, 7=Sun)</label>
+            <input type="number" name="Day of the Week" required placeholder="e.g. 3">
+        </div>
+
+        <div class="input-group">
+            <label>Longitude</label>
+            <input type="number" step="any" name="Longitude" required placeholder="e.g. 121.5">
+        </div>
+
+        <div class="input-group">
+            <label>Latitude</label>
+            <input type="number" step="any" name="Latitude" required placeholder="e.g. 31.2">
+        </div>
+
+        <div class="input-group">
+            <label>Speed (km/h)</label>
+            <input type="number" step="any" name="Speed" required placeholder="e.g. 45">
+        </div>
+
+        <div class="input-group">
+            <label>Current (A)</label>
+            <input type="number" step="any" name="Current" required placeholder="e.g. 2.5">
+        </div>
+
+        <div class="input-group">
+            <label>Total Voltage (V)</label>
+            <input type="number" step="any" name="Total Voltage" required placeholder="e.g. 308">
+        </div>
+
+        <div class="input-group">
+            <label>Max Cell Temp (°C)</label>
+            <input type="number" step="any" name="Maximum Cell Temperature of Battery" required placeholder="e.g. 31">
+        </div>
+
+        <div class="input-group">
+            <label>Min Cell Temp (°C)</label>
+            <input type="number" step="any" name="Minimum Cell Temperature of Battery" required placeholder="e.g. 29">
+        </div>
+
+        <div class="input-group">
+            <label>Trip Time Length (min)</label>
+            <input type="number" step="any" name="Trip Time Length" required placeholder="e.g. 15">
+        </div>
+
+        <button type="submit">Get Prediction</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        <strong>{{ prediction_text }}</strong>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
